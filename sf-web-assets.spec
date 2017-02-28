@@ -2,7 +2,7 @@
 
 Name:          sf-web-assets
 Version:       1.0
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       The /var/www/static directory used by sf web interface
 License:       MIT
 URL:           https://softwarefactory-project.io
@@ -18,6 +18,7 @@ BuildRequires: python-XStatic-Angular
 
 Requires:      fontawesome-fonts-web
 Requires:      js-jquery1
+Requires:      python-XStatic-Bootstrap-SCSS
 
 Source0:       https://github.com/mathiasbynens/jquery-visibility/archive/%{jqueryvisibilityversion}.tar.gz
 Source1:       http://status.openstack.org/jquery-graphite.js
@@ -49,7 +50,7 @@ pyscss /usr/share/javascript/bootstrap_scss/scss/bootstrap.scss -o build/bootstr
 %install
 install -p -D -m 0644 %{SOURCE2} %{buildroot}/etc/httpd/conf.d/sfstatic.conf
 mkdir -p %{buildroot}/var/www
-mv build %{buildroot}/var/www/static
+cp -r build %{buildroot}/var/www/static
 ln -s /usr/share/javascript/jquery/1/jquery.min.js %{buildroot}/var/www/static/js/jquery.min.js
 ln -s /usr/share/font-awesome-web/ %{buildroot}/var/www/static/font-awesome
 ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bootstrap/css/static
@@ -61,5 +62,8 @@ ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bo
 
 
 %changelog
+* Wed Mar 01 2017 Nicolas Hicher - 1.0-2
+- Add missing requirement
+
 * Mon Feb 20 2017 Tristan Cacqueray - 1.0-1
 - Initial packaging
