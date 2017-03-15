@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a72e520_d461cad4",
+        "filename": "sf-web-assets.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-15T23:12:56Z",
+      "side": 1,
+      "message": "is there a reason why simplePagination is not minified?",
+      "revId": "467c7f9a4d000682241f76a1db295b54073acf5f",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a72e520_f45ec611",
+        "filename": "sf-web-assets.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2017-03-15T23:12:56Z",
+      "side": 1,
+      "message": "Same for jquery-ui.css ?\nPerhaps comment the error if any",
+      "revId": "467c7f9a4d000682241f76a1db295b54073acf5f",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
