@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a72e520_34685ef5",
+        "filename": "sf-web-assets.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2017-03-16T10:47:26Z",
+      "side": 1,
+      "message": "Yes there isn\u0027t any already minimified version available upstream neither on the project github or on any cdn.\nSo repoxplorer expects to access the .css and .js not minified version. That\u0027s why.",
+      "parentUuid": "5a72e520_d461cad4",
+      "revId": "467c7f9a4d000682241f76a1db295b54073acf5f",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a72e520_f45ec611",
         "filename": "sf-web-assets.spec",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-15T23:12:56Z",
       "side": 1,
       "message": "Same for jquery-ui.css ?\nPerhaps comment the error if any",
+      "revId": "467c7f9a4d000682241f76a1db295b54073acf5f",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a72e520_5f09732b",
+        "filename": "sf-web-assets.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2017-03-16T10:47:26Z",
+      "side": 1,
+      "message": "Yes pyscss fails to minimify the css. I\u0027ll amend the patch.",
+      "parentUuid": "5a72e520_f45ec611",
       "revId": "467c7f9a4d000682241f76a1db295b54073acf5f",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
