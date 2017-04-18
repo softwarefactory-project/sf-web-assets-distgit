@@ -3,7 +3,7 @@
 
 Name:          sf-web-assets
 Version:       1.0
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       The /var/www/static directory used by sf web interface
 License:       MIT and BSD
 URL:           https://softwarefactory-project.io
@@ -13,13 +13,13 @@ BuildRequires: python-pathlib
 BuildRequires: python-enum34
 BuildRequires: python-scss
 
-BuildRequires: uglify-js
+BuildRequires: python2-rjsmin
 BuildRequires: python-XStatic-Bootstrap-SCSS
 BuildRequires: python-XStatic-Angular
 
 Requires:      fontawesome-fonts-web
-Requires:      js-jquery1
 Requires:      python-XStatic-Bootstrap-SCSS
+Requires:      python-XStatic-jQuery
 
 Source0:       https://github.com/mathiasbynens/jquery-visibility/archive/%{jqueryvisibilityversion}.tar.gz
 Source1:       http://status.openstack.org/jquery-graphite.js
@@ -37,7 +37,6 @@ Provides:      bundled(js-jquery-graphite)
 Provides:      bundled(js-moment)
 Provides:      bundled(js-simplepagination)
 Provides:      bundled(js-d3)
-Provides:      bundled(js-jquery-ui)
 
 
 %description
@@ -56,17 +55,17 @@ This package setup the /var/www/static directory used by the sf web interface.
 mkdir -p build/js build/css
 mkdir -p build/bootstrap/css build/bootstrap/js
 mkdir -p build/jquery-ui/css build/jquery-ui/js build/jquery-ui/images
-uglifyjs jquery-visibility-%{jqueryvisibilityversion}/jquery-visibility.js -o build/js/jquery-visibility.min.js
-uglifyjs %{SOURCE1} -o build/js/jquery.graphite.min.js
-uglifyjs %{SOURCE3} -o build/js/moment.min.js
-uglifyjs %{SOURCE6} -o build/js/dimple.min.js
-uglifyjs d3-3.1.6/d3.js -o build/js/d3.min.js
-uglifyjs /usr/share/javascript/angular/angular.js -o build/js/angular.min.js
-uglifyjs /usr/share/javascript/bootstrap_scss/js/bootstrap.js -o build/bootstrap/js/bootstrap.min.js
+python2 -mrjsmin < jquery-visibility-%{jqueryvisibilityversion}/jquery-visibility.js > build/js/jquery-visibility.min.js
+python2 -mrjsmin < %{SOURCE1} > build/js/jquery.graphite.min.js
+python2 -mrjsmin < %{SOURCE3} > build/js/moment.min.js
+python2 -mrjsmin < %{SOURCE6} > build/js/dimple.min.js
+python2 -mrjsmin < d3-3.1.6/d3.js > build/js/d3.min.js
+python2 -mrjsmin < /usr/share/javascript/angular/angular.js > build/js/angular.min.js
+python2 -mrjsmin < /usr/share/javascript/bootstrap_scss/js/bootstrap.js > build/bootstrap/js/bootstrap.min.js
 pyscss /usr/share/javascript/bootstrap_scss/scss/bootstrap.scss -o build/bootstrap/css/bootstrap.min.css
 cp simplePagination.js-%{simplepaginationversion}/simplePagination.css build/css/simplePagination.css
 cp simplePagination.js-%{simplepaginationversion}/jquery.simplePagination.js build/js/jquery.simplePagination.js
-uglifyjs jquery-ui-1.12.1/jquery-ui.js -o build/jquery-ui/js/jquery-ui.min.js
+python2 -mrjsmin < jquery-ui-1.12.1/jquery-ui.js > build/jquery-ui/js/jquery-ui.min.js
 # pyscss jquery-ui-1.12.1/jquery-ui.css -o build/jquery-ui/css/jquery-ui.min.css
 # Unable to minimify the css due to the error below. So using the minified directly
 # scss.errors.SassSyntaxError: Syntax error after u'Alpha(Opacity': Found u'=0)' but expected one of ",", ":",
@@ -80,7 +79,7 @@ cp -v jquery-ui-1.12.1/images/* build/jquery-ui/images/
 install -p -D -m 0644 %{SOURCE2} %{buildroot}/etc/httpd/conf.d/sfstatic.conf
 mkdir -p %{buildroot}/var/www
 cp -r build %{buildroot}/var/www/static
-ln -s /usr/share/javascript/jquery/1/jquery.min.js %{buildroot}/var/www/static/js/jquery.min.js
+ln -s /usr/lib/python2.7/site-packages/xstatic/pkg/jquery/data/jquery.min.js %{buildroot}/var/www/static/js/jquery.min.js
 ln -s /usr/share/font-awesome-web/ %{buildroot}/var/www/static/font-awesome
 ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bootstrap/css/static
 
@@ -91,6 +90,10 @@ ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bo
 
 
 %changelog
+* Tue Apr 18 2017 Tristan Cacqueray <tdecacqu@redhat.com> - 1.0-4
+- Use rjsmin instead of uglify
+- Use python-XStatic-jQuery instead of js-jquery1
+
 * Wed Mar 15 2017 Fabien Boucher <fboucher@redhat.com> - 1.0-3
 - Add assets for repoxplorer
 
