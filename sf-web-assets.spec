@@ -3,7 +3,7 @@
 
 Name:          sf-web-assets
 Version:       1.0
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       The /var/www/static directory used by sf web interface
 License:       MIT and BSD
 URL:           https://softwarefactory-project.io
@@ -29,6 +29,7 @@ Source4:       https://github.com/flaviusmatis/simplePagination.js/archive/%{sim
 Source5:       https://github.com/d3/d3/archive/v3.1.6.tar.gz
 Source6:       https://cdnjs.cloudflare.com/ajax/libs/dimple/2.2.0/dimple.latest.js
 Source7:       https://jqueryui.com/resources/download/jquery-ui-1.12.1.zip
+Source8:       https://raw.githubusercontent.com/vuejs/vue/90891709708e8ebdc1522eed678a49eb9f312fda/dist/vue.min.js
 
 Provides:      bundled(python-XStatic-Bootstrap-SCSS)
 Provides:      bundled(python-XStatic-Angular)
@@ -55,6 +56,7 @@ This package setup the /var/www/static directory used by the sf web interface.
 mkdir -p build/js build/css
 mkdir -p build/bootstrap/css build/bootstrap/js
 mkdir -p build/jquery-ui/css build/jquery-ui/js build/jquery-ui/images
+mv %{SOURCE8} build/js
 python2 -mrjsmin < jquery-visibility-%{jqueryvisibilityversion}/jquery-visibility.js > build/js/jquery-visibility.min.js
 python2 -mrjsmin < %{SOURCE1} > build/js/jquery.graphite.min.js
 python2 -mrjsmin < %{SOURCE3} > build/js/moment.min.js
@@ -90,6 +92,9 @@ ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bo
 
 
 %changelog
+* Sun Jul  8 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 1.0-5
+- Add vuejs-2.15.6
+
 * Tue Apr 18 2017 Tristan Cacqueray <tdecacqu@redhat.com> - 1.0-4
 - Use rjsmin instead of uglify
 - Use python-XStatic-jQuery instead of js-jquery1
