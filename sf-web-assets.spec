@@ -3,7 +3,7 @@
 
 Name:          sf-web-assets
 Version:       1.0
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       The /var/www/static directory used by sf web interface
 License:       MIT and BSD
 URL:           https://softwarefactory-project.io
@@ -17,6 +17,7 @@ BuildRequires: python2-rjsmin
 BuildRequires: python-XStatic-Bootstrap-SCSS
 BuildRequires: python-XStatic-Angular
 
+Requires:      xstatic-patternfly-common
 Requires:      fontawesome-fonts-web
 Requires:      python-XStatic-Bootstrap-SCSS
 Requires:      python-XStatic-jQuery
@@ -85,6 +86,7 @@ cp -r build %{buildroot}/var/www/static
 ln -s /usr/lib/python2.7/site-packages/xstatic/pkg/jquery/data/jquery.min.js %{buildroot}/var/www/static/js/jquery.min.js
 ln -s /usr/share/font-awesome-web/ %{buildroot}/var/www/static/font-awesome
 ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bootstrap/css/static
+ln -s /usr/share/javascript/patternfly/ %{buildroot}/var/www/static/patternfly
 
 
 %files
@@ -93,6 +95,9 @@ ln -s /usr/share/javascript/bootstrap_scss/fonts/ %{buildroot}/var/www/static/bo
 
 
 %changelog
+* Mon Aug 20 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 1.0-6
+- Add patternfly xstatic
+
 * Sun Jul  8 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 1.0-5
 - Add vuejs-2.15.6
 
